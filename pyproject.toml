@@ -3,8 +3,8 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "rethinkport"
-version = "1.0.3"
+name = "RethinkPort"
+version = "1.0.4"
 authors = [
     {name = "Akeem Amusat", email = "hello@a4m.dev"},
 ]

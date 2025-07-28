@@ -1,4 +1,4 @@
-# RethinkPort 🚢
+# RethinkPort
 
 A comprehensive tool for migrating RethinkDB databases to MySQL, designed to work with official RethinkDB dump files.
 
