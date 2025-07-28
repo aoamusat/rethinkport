@@ -16,7 +16,7 @@ setup(
     name="rethinkport",
     version="1.0.0",
     author="RethinkPort Contributors",
-    author_email="your-email@example.com",
+    author_email="hello@a4m.dev",
     description="Port your RethinkDB data to MySQL",
     long_description=long_description,
     long_description_content_type="text/markdown",
