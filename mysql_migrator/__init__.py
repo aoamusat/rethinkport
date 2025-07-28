@@ -6,7 +6,7 @@ A comprehensive tool for migrating RethinkDB databases to MySQL,
 designed to work with official RethinkDB dump files.
 """
 
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 __author__ = "RethinkPort Contributors"
 __email__ = "hello@a4m.dev"
 
