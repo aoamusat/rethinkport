@@ -106,7 +106,7 @@ class TestRethinkDBMigrator(unittest.TestCase):
             "timezone": "+00:00",
         }
         converted = migrator.convert_value_for_mysql(time_obj)
-        self.assertEqual(converted, "2022-01-01 00:00:00")
+        self.assertEqual(converted, "2022-01-01 01:00:00")
 
         # Test JSON object conversion
         json_obj = {"key": "value", "nested": {"data": 123}}

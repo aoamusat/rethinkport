@@ -2,7 +2,7 @@
 
 A comprehensive tool for migrating RethinkDB databases to MySQL, designed to work with official RethinkDB dump files.
 
-**Port your RethinkDB data to MySQL with confidence.**
+**Port your RethinkDB data to MySQL.**
 
 ## Overview
 
@@ -98,7 +98,7 @@ usage: rethinkport [-h] [--config CONFIG] [--host HOST] [--port PORT]
                    [--dry-run] [--batch-size BATCH_SIZE] [--table-order TABLE_ORDER]
                    dump_path
 
-RethinkPort 🚢 - Port your RethinkDB data to MySQL with confidence
+RethinkPort 🚢 - Port your RethinkDB data to MySQL
 
 positional arguments:
   dump_path             Path to extracted RethinkDB dump directory

@@ -98,7 +98,7 @@ def validate_config(config: Dict[str, Any]) -> bool:
 def main():
     """Main CLI entry point"""
     parser = argparse.ArgumentParser(
-        description="RethinkPort 🚢 - Port your RethinkDB data to MySQL with confidence",
+        description="RethinkPort 🚢 - Port your RethinkDB data to MySQL.",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
