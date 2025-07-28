@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "rethinkport"
-version = "1.0.1"
+version = "1.0.0"
 authors = [
     {name = "Akeem Amusat", email = "hello@a4m.dev"},
 ]

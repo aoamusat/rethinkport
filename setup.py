@@ -14,7 +14,7 @@ with open("requirements.txt", "r", encoding="utf-8") as fh:
 
 setup(
     name="rethinkport",
-    version="1.0.1",
+    version="1.0.0",
     author="Akeem Amusat",
     author_email="hello@a4m.dev",
     description="Port your RethinkDB data to MySQL",
