@@ -29,15 +29,9 @@ This tool was created to address the lack of reliable migration tools for moving
 
 ### Prerequisites
 
-- Python 3.7+
+- Python 3.9+
 - MySQL 5.7+ or MariaDB 10.2+
 - RethinkDB (for creating dumps)
-
-### Install Dependencies
-
-```bash
-pip install -r requirements.txt
-```
 
 ### Install from PyPI
 

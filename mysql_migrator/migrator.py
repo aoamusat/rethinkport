@@ -26,13 +26,11 @@ class RethinkDBMigrator:
         if self.dry_run:
             print("✓ DRY RUN: Skipping MySQL connection")
             return None
-            
+
         try:
             mysql_config = self.config["mysql"]
             self.connection = pymysql.connect(
-                **mysql_config, 
-                cursorclass=pymysql.cursors.DictCursor, 
-                autocommit=True
+                **mysql_config, cursorclass=pymysql.cursors.DictCursor, autocommit=True
             )
             print(f"✓ Connected to MySQL database: {mysql_config['database']}")
             return self.connection
@@ -59,7 +57,7 @@ class RethinkDBMigrator:
         sample_size = min(1000, len(data))
 
         print(f"  Analyzing data types from {sample_size} sample records...")
-        
+
         # First pass: analyze types from sample
         for record in tqdm(data[:sample_size], desc="  Analyzing sample", leave=False):
             for field_name, value in record.items():
@@ -69,7 +67,8 @@ class RethinkDBMigrator:
                         "max_length": 0,
                         "nullable": True,
                         "is_primary": field_name == "id",
-                        "is_foreign_key": field_name.endswith("_id") and field_name != "id",
+                        "is_foreign_key": field_name.endswith("_id")
+                        and field_name != "id",
                         "is_timestamp": False,
                         "is_json": False,
                         "sample_values": [],
@@ -116,9 +115,13 @@ class RethinkDBMigrator:
                         # Determine VARCHAR vs TEXT based on length
                         max_len = schema[field_name]["max_length"]
                         if max_len <= 100:
-                            schema[field_name]["type"] = f"VARCHAR({max(max_len * 4, 255)})"
+                            schema[field_name][
+                                "type"
+                            ] = f"VARCHAR({max(max_len * 4, 255)})"
                         elif max_len <= 500:
-                            schema[field_name]["type"] = f"VARCHAR({max(max_len * 3, 1000)})"
+                            schema[field_name][
+                                "type"
+                            ] = f"VARCHAR({max(max_len * 3, 1000)})"
                         elif max_len <= 2000:
                             schema[field_name]["type"] = f"VARCHAR({max_len * 2})"
                         else:
@@ -235,7 +238,9 @@ class RethinkDBMigrator:
                     if index_sql not in indexes:
                         indexes.append(index_sql)
                 else:
-                    print(f"Warning: Index on '{index_name}' skipped - column not found in data")
+                    print(
+                        f"Warning: Index on '{index_name}' skipped - column not found in data"
+                    )
 
         # Build final SQL
         sql_parts = [f"CREATE TABLE `{table_name}` ("]
@@ -301,7 +306,9 @@ class RethinkDBMigrator:
     def migrate_table(self, table_name: str) -> bool:
         """Migrate a single table using .info and .json files"""
         try:
-            print(f"\n=== {'[DRY RUN] ' if self.dry_run else ''}Migrating {table_name} ===")
+            print(
+                f"\n=== {'[DRY RUN] ' if self.dry_run else ''}Migrating {table_name} ==="
+            )
 
             json_file = os.path.join(self.dump_path, f"{table_name}.json")
             info_file = os.path.join(self.dump_path, f"{table_name}.info")
@@ -346,7 +353,7 @@ class RethinkDBMigrator:
 
             # Generate CREATE TABLE SQL
             create_sql = self.generate_create_table_sql(table_name, schema, info_data)
-            
+
             if self.dry_run:
                 print(f"✓ [DRY RUN] Would create table with SQL:")
                 print(create_sql)
@@ -361,13 +368,17 @@ class RethinkDBMigrator:
                 if data:
                     self._insert_data(cursor, table_name, schema, data)
 
-            print(f"✓ Successfully {'analyzed' if self.dry_run else 'migrated'} {table_name}")
+            print(
+                f"✓ Successfully {'analyzed' if self.dry_run else 'migrated'} {table_name}"
+            )
             self.stats["success"] += 1
             self.stats["total_records"] += len(data)
             return True
 
         except Exception as e:
-            print(f"✗ Error {'analyzing' if self.dry_run else 'migrating'} {table_name}: {e}")
+            print(
+                f"✗ Error {'analyzing' if self.dry_run else 'migrating'} {table_name}: {e}"
+            )
             self.stats["failed"] += 1
             return False
 
@@ -392,8 +403,12 @@ class RethinkDBMigrator:
                         converted_value = self.convert_value_for_mysql(value)
 
                         # Handle datetime conversion for timestamp fields
-                        if schema[col]["is_timestamp"] and isinstance(converted_value, str):
-                            converted_value = self._convert_datetime_string(converted_value)
+                        if schema[col]["is_timestamp"] and isinstance(
+                            converted_value, str
+                        ):
+                            converted_value = self._convert_datetime_string(
+                                converted_value
+                            )
 
                         row_data.append(converted_value)
                     batch_data.append(row_data)
@@ -403,13 +418,17 @@ class RethinkDBMigrator:
 
     def migrate_all_tables(self):
         """Migrate all tables in the dump directory"""
-        print(f"=== {'[DRY RUN] ' if self.dry_run else ''}Enhanced RethinkDB to MySQL Migration ===")
+        print(
+            f"=== {'[DRY RUN] ' if self.dry_run else ''}Enhanced RethinkDB to MySQL Migration ==="
+        )
 
         # Find all available tables
         json_files = [f for f in os.listdir(self.dump_path) if f.endswith(".json")]
         available_tables = [f.replace(".json", "") for f in json_files]
 
-        print(f"Found {len(available_tables)} tables to {'analyze' if self.dry_run else 'migrate'}")
+        print(
+            f"Found {len(available_tables)} tables to {'analyze' if self.dry_run else 'migrate'}"
+        )
 
         # Get table processing order
         table_order = self.config.get("migration", {}).get("table_order", [])
@@ -432,9 +451,15 @@ class RethinkDBMigrator:
         """Print final migration statistics"""
         action = "Analysis" if self.dry_run else "Migration"
         print(f"\n=== {action} Summary ===")
-        print(f"✓ Successfully {'analyzed' if self.dry_run else 'migrated'}: {self.stats['success']} tables")
-        print(f"✗ Failed {'analyses' if self.dry_run else 'migrations'}: {self.stats['failed']} tables")
-        print(f"Total records {'analyzed' if self.dry_run else 'migrated'}: {self.stats['total_records']:,}")
+        print(
+            f"✓ Successfully {'analyzed' if self.dry_run else 'migrated'}: {self.stats['success']} tables"
+        )
+        print(
+            f"✗ Failed {'analyses' if self.dry_run else 'migrations'}: {self.stats['failed']} tables"
+        )
+        print(
+            f"Total records {'analyzed' if self.dry_run else 'migrated'}: {self.stats['total_records']:,}"
+        )
 
         if not self.dry_run and self.connection:
             # Show table statistics
