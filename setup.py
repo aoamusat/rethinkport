@@ -41,7 +41,7 @@ setup(
     install_requires=requirements,
     entry_points={
         "console_scripts": [
-            "rethinkport=rethinkdb_mysql_migrator.cli:main",
+            "rethinkport=mysql_migrator.cli:main",
         ],
     },
     keywords="rethinkdb mysql migration database port converter rethinkport",

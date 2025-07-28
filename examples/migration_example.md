@@ -6,17 +6,17 @@ This example shows how to migrate a RethinkDB database to MySQL using the migrat
 
 ```bash
 # Connect to your RethinkDB instance and create a dump
-rethinkdb dump -c localhost:28015 -f myapp_dump.tar.gz
+rethinkdb dump -c localhost:28015 -f dbname_dump.tar.gz
 
 # Or if RethinkDB is on a different host/port
-rethinkdb dump -c production-server:28015 -f myapp_dump.tar.gz
+rethinkdb dump -c production-server:28015 -f dbname_dump.tar.gz
 ```
 
 ## Step 2: Extract the Dump
 
 ```bash
 # Extract the tar.gz file
-tar -xzf myapp_dump.tar.gz
+tar -xzf dbname_dump.tar.gz
 
 # This creates a directory structure like:
 # rethinkdb_dump_2024_07_24_19_30_00/
@@ -50,21 +50,21 @@ export MYSQL_PASSWORD=secure_password
 export MYSQL_DATABASE=dbname
 
 # Run the migration
-python -m mysql_migrator rethinkdb_dump_2024_07_24_19_30_00/myapp/
+python -m mysql_migrator rethinkdb_dump_2024_07_24_19_30_00/dbname/
 ```
 
 ### Migration with Configuration File
 
 ```bash
 # Create config.json (see examples/config.json)
-python -m mysql_migrator rethinkdb_dump_2024_07_24_19_30_00/myapp/ --config config.json
+python -m mysql_migrator rethinkdb_dump_2024_07_24_19_30_00/dbname/ --config config.json
 ```
 
 ### Dry Run First (Recommended)
 
 ```bash
 # Test the migration without actually executing it
-python -m mysql_migrator rethinkdb_dump_2024_07_24_19_30_00/myapp/ --dry-run
+python -m mysql_migrator rethinkdb_dump_2024_07_24_19_30_00/dbname/ --dry-run
 ```
 
 ## Step 5: Verify Migration

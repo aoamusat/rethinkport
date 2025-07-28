@@ -48,7 +48,7 @@ pip install rethinkport
 ### Install from Source
 
 ```bash
-git clone https://github.com/yourusername/rethinkport.git
+git clone https://github.com/aoamusat/rethinkport.git
 cd rethinkport
 pip install -e .
 ```
@@ -246,8 +246,8 @@ rethinkport \
 ### Development Setup
 
 ```bash
-git clone https://github.com/yourusername/rethinkdb-mysql-migrator.git
-cd rethinkdb-mysql-migrator
+git clone https://github.com/aoamusat/rethinkport.git
+cd rethinkport
 pip install -e ".[dev]"
 pytest
 ```
@@ -266,7 +266,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 If you encounter issues or have questions:
 
-1. Check the [Issues](https://github.com/yourusername/rethinkdb-mysql-migrator/issues) page
+1. Check the [Issues](https://github.com/aoamusat/rethinkport/issues) page
 2. Create a new issue with detailed information
 3. Include your RethinkDB/MySQL versions and error logs
 

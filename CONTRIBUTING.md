@@ -15,7 +15,7 @@ Thank you for your interest in contributing to RethinkPort! This document provid
 1. Fork the repository on GitHub
 2. Clone your fork locally:
    ```bash
-   git clone https://github.com/yourusername/rethinkport.git
+   git clone https://github.com/aoamusat/rethinkport.git
    cd rethinkport
    ```
 
@@ -79,7 +79,7 @@ flake8 .
 pytest
 
 # Run tests with coverage
-pytest --cov=rethinkdb_mysql_migrator
+pytest --cov=mysql_migrator
 
 # Run specific test file
 pytest tests/test_migrator.py
@@ -193,7 +193,7 @@ Areas where contributions are especially welcome:
 ## Code Organization
 
 ```
-rethinkdb_mysql_migrator/
+mysql_migrator/
 ├── __init__.py          # Package initialization
 ├── migrator.py          # Core migration logic
 ├── cli.py              # Command-line interface
