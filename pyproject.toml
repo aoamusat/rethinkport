@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rethinkport"
+version = "1.0.0"
+authors = [
+    {name = "RethinkPort Contributors", email = "hello@a4m.dev"},
+]
+description = "Port your RethinkDB data to MySQL with confidence"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.9"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Database",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Utilities",
+]
+keywords = ["rethinkdb", "mysql", "migration", "database", "port", "converter"]
+dependencies = [
+    "pymysql>=1.0.2",
+    "click>=8.0.0",
+    "tqdm>=4.64.0",
+    "colorama>=0.4.4",
+]
+
+[project.urls]
+Homepage = "https://github.com/aoamusat/rethinkport"
+"Bug Reports" = "https://github.com/aoamusat/rethinkport/issues"
+Source = "https://github.com/aoamusat/rethinkport"
+Documentation = "https://github.com/aoamusat/rethinkport#readme"
+
+[project.scripts]
+rethinkport = "mysql_migrator.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["mysql_migrator*"]
+
+[tool.setuptools.package-data]
+mysql_migrator = ["*.py"]

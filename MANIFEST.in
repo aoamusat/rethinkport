@@ -1,0 +1,8 @@
+include README.md
+include LICENSE
+include requirements.txt
+include CONTRIBUTING.md
+recursive-include mysql_migrator *.py
+recursive-include examples *.json *.md
+global-exclude __pycache__
+global-exclude *.py[co]

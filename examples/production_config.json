@@ -1,0 +1,14 @@
+{
+  "mysql": {
+    "host": "production-mysql-server.example.com",
+    "port": 3306,
+    "user": "migration_user",
+    "password": "${MYSQL_PASSWORD}",
+    "database": "dbname",
+    "charset": "utf8mb4"
+  },
+  "migration": {
+    "batch_size": 5000,
+    "table_order": []
+  }
+}
