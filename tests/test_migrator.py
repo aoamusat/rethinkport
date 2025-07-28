@@ -3,10 +3,7 @@
 Basic tests for RethinkDB to MySQL Migrator
 """
 import unittest
-import json
 import tempfile
-import os
-from datetime import datetime
 
 from mysql_migrator.migrator import RethinkDBMigrator
 
